@@ -1,5 +1,5 @@
 # Pay_My_Buddy
 
-# MDP
+# Mdp
 
-![PayMyBuddy.drawio.png](..%2FUsers%2FDavid%2FDownloads%2FPayMyBuddy.drawio.png)
+![PayMyBuddy.jpg](Pictures%2FPayMyBuddy.jpg)
