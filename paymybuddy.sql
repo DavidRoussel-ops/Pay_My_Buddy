@@ -44,13 +44,31 @@ REFERENCES USER(ID),
 FOREIGN KEY(TRANSACTION_ID)
 REFERENCES TRANSACTION(ID));
 
-INSERT INTO USER(ID,USERNAME,EMAIL,PASSWORD) VALUES(1,'Jaques', 'jaquesatgmail.com', 'jaquespassword');
-INSERT INTO USER(ID,USERNAME,EMAIL,PASSWORD) VALUES(2,'Pierre', 'pierreatgmail.com', 'pierrepassword');
-INSERT INTO USER(ID,USERNAME,EMAIL,PASSWORD) VALUES(3,'Jean', 'jeanatgmail.com', 'jeanpassword');
-INSERT INTO USER(ID,USERNAME,EMAIL,PASSWORD) VALUES(4,'Michel', 'michelatgmail.com', 'michelpassword');
+INSERT INTO USER(ID,USERNAME,EMAIL,PASSWORD) VALUES
+(1,'Jaques', 'jaques@gmail.com', 'jaquespassword'),
+(2,'Pierre', 'pierre@gmail.com', 'pierrepassword'),
+(3,'Jean', 'jean@gmail.com', 'jeanpassword'),
+(4,'Michel', 'michel@gmail.com', 'michelpassword');
 
-INSERT INTO TRANSACTION(ID,DESCRIPTION, AMOUNT) VALUES(1,'restaurant', 25);
-INSERT INTO TRANSACTION(ID,DESCRIPTION, AMOUNT) VALUES(2,'magasin', 30);
-INSERT INTO TRANSACTION(ID,DESCRIPTION, AMOUNT) VALUES(3,'note de frais', 50);
+INSERT INTO TRANSACTION(ID,DESCRIPTION, AMOUNT) VALUES
+(1,'restaurant', 25),
+(2,'magasin', 30),
+(3,'note de frais', 50);
+
+INSERT INTO USER_FRIENDS(ID, USER_FRIEND_ID) VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4);
+
+INSERT INTO USER_TRANSACTION_RECEIVER(ID, USER_ID, TRANSACTION_ID) VALUES
+(1, 3, 3),
+(2, 1, 1),
+(3, 2, 2);
+
+INSERT INTO USER_TRANSACTION_SENDER(ID, USER_ID, TRANSACTION_ID) VALUES
+(1, 1, 3),
+(2, 2, 1),
+(3, 3, 2);
 
 COMMIT;
