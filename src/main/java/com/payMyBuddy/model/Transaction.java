@@ -11,6 +11,12 @@ public class Transaction {
     @Column(name = "ID")
     private int id;
 
+    @Column(name = "SENDER")
+    private Integer sender;
+
+    @Column(name = "RECEIVER")
+    private Integer receiver;
+
     @Column(name = "DESCRIPTION")
     private String description;
 
@@ -23,6 +29,22 @@ public class Transaction {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getSender() {
+        return sender;
+    }
+
+    public void setSender(Integer sender) {
+        this.sender = sender;
+    }
+
+    public int getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(Integer receiver) {
+        this.receiver = receiver;
     }
 
     public String getDescription() {
