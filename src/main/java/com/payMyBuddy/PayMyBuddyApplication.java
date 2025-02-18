@@ -36,7 +36,10 @@ public class PayMyBuddyApplication implements CommandLineRunner {
 
 		Optional<User> optionalUser = userService.getUserById(1);
 		User userId1 = optionalUser.get();
+
 		System.out.println(userId1.getUsername());
+
+		userId1.getSender().forEach(transaction -> System.out.println(transaction.getSender()));
 
 		Optional<Transaction> optionalTransaction = transactionService.getTransactionById(1);
 		Transaction transactionId1 = optionalTransaction.get();
