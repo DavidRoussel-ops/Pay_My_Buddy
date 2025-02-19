@@ -24,7 +24,19 @@ public class User {
     private String password;
 
     @Column(name = "CONNECTIONS")
-    private Integer connections;
+    @ManyToMany(
+            fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            }
+    )
+    @JoinTable(
+            name = "USER_FRIENDS",
+            joinColumns = @JoinColumn(name = "USER_ID"),
+            inverseJoinColumns = @JoinColumn(name = "USER_FRIENDS")
+    )
+    private List<User> connections = new ArrayList<>();
 
     @OneToMany(
             cascade = CascadeType.ALL,
@@ -33,6 +45,14 @@ public class User {
     )
     @JoinColumn(name = "SENDER")
     List<Transaction> sender = new ArrayList<>();
+
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.EAGER
+    )
+    @JoinColumn(name = "RECEIVER")
+    List<Transaction> receiver = new ArrayList<>();
 
     public int getId() {
         return id;
@@ -66,11 +86,11 @@ public class User {
         this.password = password;
     }
 
-    public int getConnections() {
+    public List<User> getConnections() {
         return connections;
     }
 
-    public void setConnections(Integer connections) {
+    public void setConnections(List<User> connections) {
         this.connections = connections;
     }
 
@@ -80,5 +100,13 @@ public class User {
 
     public void setSender(List<Transaction> sender) {
         this.sender = sender;
+    }
+
+    public List<Transaction> getReceiver() {
+        return receiver;
+    }
+
+    public void setReceiver(List<Transaction> receiver) {
+        this.receiver = receiver;
     }
 }
