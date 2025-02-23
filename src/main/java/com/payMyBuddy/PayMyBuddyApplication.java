@@ -10,6 +10,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @SpringBootApplication
@@ -53,6 +55,13 @@ public class PayMyBuddyApplication implements CommandLineRunner {
 		userId1.getConnections().forEach(
 				user -> System.out.println(user.getUsername())
 		);
+
+		User user = new User();
+		user.setUsername("Paul");
+		user.setEmail("paul@gmail.com");
+		user.setPassword("paul");
+
+		userService.addUser(user);
 	}
 
 }
