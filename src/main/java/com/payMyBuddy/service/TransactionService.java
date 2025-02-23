@@ -2,6 +2,7 @@ package com.payMyBuddy.service;
 
 import com.payMyBuddy.model.Transaction;
 import com.payMyBuddy.repository.TransactionRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,5 +20,9 @@ public class TransactionService {
 
     public Optional<Transaction> getTransactionById(Integer id) {
         return transactionRepository.findById(id);
+    }
+
+    public Transaction addTransaction(Transaction transaction) {
+        return transactionRepository.save(transaction);
     }
 }
