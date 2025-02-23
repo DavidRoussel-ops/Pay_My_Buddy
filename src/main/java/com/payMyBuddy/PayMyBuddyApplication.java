@@ -2,7 +2,9 @@ package com.payMyBuddy;
 
 import com.payMyBuddy.model.Transaction;
 import com.payMyBuddy.model.User;
+import com.payMyBuddy.model.UserFriends;
 import com.payMyBuddy.service.TransactionService;
+import com.payMyBuddy.service.UserFriendsService;
 import com.payMyBuddy.service.UserService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,9 @@ public class PayMyBuddyApplication implements CommandLineRunner {
 
 	@Autowired
 	private TransactionService transactionService;
+
+	@Autowired
+	private UserFriendsService userFriendsService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(PayMyBuddyApplication.class, args);
@@ -43,25 +48,40 @@ public class PayMyBuddyApplication implements CommandLineRunner {
 
 		System.out.println(userId1.getUsername());
 
-		userId1.getSender().forEach(transaction -> System.out.println(transaction.getSender()));
+		userId1.getSender().forEach(transaction -> System.out.println(transaction.getSender()));*/
 
 		Optional<Transaction> optionalTransaction = transactionService.getTransactionById(1);
 		Transaction transactionId1 = optionalTransaction.get();
-		System.out.println(transactionId1.getDescription());*/
+		System.out.println(transactionId1.getSender());
 
-		Optional<User> optionalUser = userService.getUserById(2);
+		Optional<User> optionalUser = userService.getUserById(1);
 		User userId1 = optionalUser.get();
+
+		Optional<User> optionalUser1 = userService.getUserById(9);
+		User userId9 = optionalUser1.get();
 
 		userId1.getConnections().forEach(
 				user -> System.out.println(user.getUsername())
 		);
 
-		User user = new User();
-		user.setUsername("Paul");
-		user.setEmail("paul@gmail.com");
-		user.setPassword("paul");
+		/*User user5 = new User();
+		user5.setUsername("Paul");
+		user5.setEmail("paul@gmail.com");
+		user5.setPassword("paul");
 
-		userService.addUser(user);
+		userService.addUser(user5);*/
+
+		UserFriends userFriends = new UserFriends();
+		userFriends.setUserId(userId9.getId());
+		userFriends.setUserFriends(userId1.getId());
+
+		userFriendsService.addUserFriends(userFriends);
+		/*List<User> newFriends = new ArrayList<>();
+		newFriends.add(user5);
+
+		userId1.getConnections().forEach(
+				user -> user.setConnections(newFriends)
+		);*/
 	}
 
 }
