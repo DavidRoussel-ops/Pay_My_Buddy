@@ -48,13 +48,13 @@ public class PayMyBuddyApplication implements CommandLineRunner {
 
 		System.out.println(userId1.getUsername());
 
-		userId1.getSender().forEach(transaction -> System.out.println(transaction.getSender()));*/
+		userId1.getSender().forEach(transaction -> System.out.println(transaction.getSender()));
 
 		Optional<Transaction> optionalTransaction = transactionService.getTransactionById(1);
 		Transaction transactionId1 = optionalTransaction.get();
 		System.out.println(transactionId1.getSender());
 
-		Optional<User> optionalUser = userService.getUserById(1);
+		/*Optional<User> optionalUser = userService.getUserById(1);
 		User userId1 = optionalUser.get();
 
 		Optional<User> optionalUser1 = userService.getUserById(9);
@@ -64,24 +64,39 @@ public class PayMyBuddyApplication implements CommandLineRunner {
 				user -> System.out.println(user.getUsername())
 		);
 
-		/*User user5 = new User();
+		User user5 = new User();
 		user5.setUsername("Paul");
 		user5.setEmail("paul@gmail.com");
 		user5.setPassword("paul");
 
-		userService.addUser(user5);*/
+		userService.addUser(user5);
 
 		UserFriends userFriends = new UserFriends();
 		userFriends.setUserId(userId9.getId());
 		userFriends.setUserFriends(userId1.getId());
 
 		userFriendsService.addUserFriends(userFriends);
-		/*List<User> newFriends = new ArrayList<>();
+		List<User> newFriends = new ArrayList<>();
 		newFriends.add(user5);
 
 		userId1.getConnections().forEach(
 				user -> user.setConnections(newFriends)
-		);*/
+		);
+
+		//Méthode pour update une entité
+		User userExisting = userService.getUserById(4).get();
+		System.out.println("user mail : " + userExisting.getEmail());
+
+		userExisting.setEmail("michel@gmail.com");
+		userService.addUser(userExisting);
+
+		System.out.println("user mail : " + userExisting.getEmail());
+
+		//Test suppression user
+		userService.deleteUserById(3);*/
+
+		//Test suppression transaction
+		transactionService.deleteTransactionById(2);
 	}
 
 }
