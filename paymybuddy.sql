@@ -22,10 +22,10 @@ CONNECTIONS INT NULL
 LOCK TABLES USER WRITE;
 
 INSERT INTO USER(ID,USERNAME,EMAIL,PASSWORD) VALUES
-(1,'Jaques', 'jaquesatgmail.com', 'jaquespassword'),
-(2,'Pierre', 'pierreatgmail.com', 'pierrepassword'),
-(3,'Jean', 'jeanatgmail.com', 'jeanpassword'),
-(4,'Michel', 'michelatgmail.com', 'michelpassword');
+(1,'Jaques', 'jaques@gmail.com', 'jaquespassword'),
+(2,'Pierre', 'pierre@gmail.com', 'pierrepassword'),
+(3,'Jean', 'jean@gmail.com', 'jeanpassword'),
+(4,'Michel', 'michel@gmail.com', 'michelpassword');
 
 UNLOCK TABLES;
 
@@ -33,8 +33,8 @@ DROP TABLES IF EXISTS TRANSACTION;
 
 CREATE TABLE TRANSACTION (
 ID int PRIMARY KEY AUTO_INCREMENT NOT NULL,
-SENDER INT NOT NULL,
-RECEIVER INT NOT NULL,
+SENDER INT NULL,
+RECEIVER INT NULL,
 DESCRIPTION VARCHAR(255) NOT NULL,
 AMOUNT DOUBLE NOT NULL,
 FOREIGN KEY(SENDER)
