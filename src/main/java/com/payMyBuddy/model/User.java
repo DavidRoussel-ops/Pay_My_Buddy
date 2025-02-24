@@ -39,20 +39,22 @@ public class User {
     private List<User> connections = new ArrayList<>();
 
     @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true,
-            fetch = FetchType.EAGER
+            cascade = CascadeType.ALL
     )
     @JoinColumn(name = "SENDER")
     List<Transaction> sender = new ArrayList<>();
 
     @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true,
-            fetch = FetchType.EAGER
+            cascade = CascadeType.ALL
     )
     @JoinColumn(name = "RECEIVER")
     List<Transaction> receiver = new ArrayList<>();
+
+    @OneToMany(
+            cascade = CascadeType.ALL
+    )
+    @JoinColumn(name = "USER_FRIENDS")
+    List<UserFriends> userFriends = new ArrayList<>();
 
     public int getId() {
         return id;
