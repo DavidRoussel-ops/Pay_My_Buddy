@@ -19,23 +19,23 @@ import java.util.Optional;
 @SpringBootApplication
 public class PayMyBuddyApplication implements CommandLineRunner {
 
-	@Autowired
-	private UserService userService;
+    @Autowired
+    private UserService userService;
 
-	@Autowired
-	private TransactionService transactionService;
+    @Autowired
+    private TransactionService transactionService;
 
-	@Autowired
-	private UserFriendsService userFriendsService;
+    @Autowired
+    private UserFriendsService userFriendsService;
 
-	public static void main(String[] args) {
-		SpringApplication.run(PayMyBuddyApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(PayMyBuddyApplication.class, args);
+    }
 
-	@Override
-	@Transactional
-	public void run(String... args) throws Exception {
-		System.out.println("L'application est lancer");
+    @Override
+    @Transactional
+    public void run(String... args) throws Exception {
+        System.out.println("L'application est lancer");
 
 		/*Iterable<User> users = userService.getUsers();
 		users.forEach(user -> System.out.println(user.getUsername()));
@@ -93,10 +93,15 @@ public class PayMyBuddyApplication implements CommandLineRunner {
 		System.out.println("user mail : " + userExisting.getEmail());
 
 		//Test suppression user
-		userService.deleteUserById(3);*/
+		userService.deleteUserById(3);
 
 		//Test suppression transaction
-		transactionService.deleteTransactionById(2);
-	}
+		transactionService.deleteTransactionById(2);*/
+
+        //Test récupération id par email
+        Iterable<User> searchResults = userService.getUserByEmail("jaques@gmail.com");
+        searchResults.forEach(user -> System.out.println("jaques@gmail.com à pour id : " + user.getId()));
+
+    }
 
 }
