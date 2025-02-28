@@ -96,11 +96,11 @@ public class PayMyBuddyApplication implements CommandLineRunner {
 		userService.deleteUserById(3);
 
 		//Test suppression transaction
-		transactionService.deleteTransactionById(2);*/
+		transactionService.deleteTransactionById(2);
 
         //Test récupération id par email
         Iterable<User> searchResults = userService.getUserByEmail("jaques@gmail.com");
-        searchResults.forEach(user -> System.out.println("jaques@gmail.com à pour id : " + user.getId()));
+        searchResults.forEach(user -> System.out.println("jaques@gmail.com à pour id : " + user.getId()));*/
 
     }
 
