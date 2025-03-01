@@ -2,7 +2,6 @@ package com.payMyBuddy.service;
 
 import com.payMyBuddy.model.User;
 import com.payMyBuddy.repository.UserRepository;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +21,7 @@ public class UserService {
         return userRepository.findById(id);
     }
 
-    public Iterable<User> getUserByEmail(String email) {
+    public User getUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
