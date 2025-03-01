@@ -1,8 +1,5 @@
 package com.payMyBuddy;
 
-import com.payMyBuddy.model.Transaction;
-import com.payMyBuddy.model.User;
-import com.payMyBuddy.model.UserFriends;
 import com.payMyBuddy.service.TransactionService;
 import com.payMyBuddy.service.UserFriendsService;
 import com.payMyBuddy.service.UserService;
@@ -11,10 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 @SpringBootApplication
 public class PayMyBuddyApplication implements CommandLineRunner {
