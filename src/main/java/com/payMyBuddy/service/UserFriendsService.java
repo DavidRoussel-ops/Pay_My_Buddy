@@ -1,6 +1,5 @@
 package com.payMyBuddy.service;
 
-import com.payMyBuddy.model.User;
 import com.payMyBuddy.model.UserFriends;
 import com.payMyBuddy.repository.UserFriendsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +13,11 @@ public class UserFriendsService {
     @Autowired
     UserFriendsRepository userFriendsRepository;
 
-    public Iterable<UserFriends> getUsers() {
+    public Iterable<UserFriends> getUserFriends() {
         return userFriendsRepository.findAll();
     }
 
-    public Optional<UserFriends> getUserById(Integer id) {
+    public Optional<UserFriends> getUserFriendsById(Integer id) {
         return userFriendsRepository.findById(id);
     }
 
