@@ -1,5 +1,6 @@
 package com.payMyBuddy;
 
+import com.payMyBuddy.model.User;
 import com.payMyBuddy.service.TransactionService;
 import com.payMyBuddy.service.UserFriendsService;
 import com.payMyBuddy.service.UserService;
@@ -57,13 +58,6 @@ public class PayMyBuddyApplication implements CommandLineRunner {
 				user -> System.out.println(user.getUsername())
 		);
 
-		User user5 = new User();
-		user5.setUsername("Paul");
-		user5.setEmail("paul@gmail.com");
-		user5.setPassword("paul");
-
-		userService.addUser(user5);
-
 		UserFriends userFriends = new UserFriends();
 		userFriends.setUserId(userId9.getId());
 		userFriends.setUserFriends(userId1.getId());
@@ -93,7 +87,15 @@ public class PayMyBuddyApplication implements CommandLineRunner {
 
         //Test récupération id par email
         Iterable<User> searchResults = userService.getUserByEmail("jaques@gmail.com");
-        searchResults.forEach(user -> System.out.println("jaques@gmail.com à pour id : " + user.getId()));*/
+        searchResults.forEach(user -> System.out.println("jaques@gmail.com à pour id : " + user.getId()));
+        User user = new User();
+        user.setUsername("Test");
+        user.setEmail("test@gmail.com");
+        user.setPassword("test");
+
+        userService.addUser(user);
+
+        System.out.println("Utilisateur enregistrer : " + user.getUsername());*/
 
     }
 
