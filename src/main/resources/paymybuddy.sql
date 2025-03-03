@@ -22,10 +22,10 @@ CONNECTIONS INT NULL
 LOCK TABLES USER WRITE;
 
 INSERT INTO USER(ID,USERNAME,EMAIL,PASSWORD) VALUES
-(1,'Jaques', 'jaques@gmail.com', 'jaquespassword'),
-(2,'Pierre', 'pierre@gmail.com', 'pierrepassword'),
-(3,'Jean', 'jean@gmail.com', 'jeanpassword'),
-(4,'Michel', 'michel@gmail.com', 'michelpassword');
+(1,'Jaques', 'jaques@gmail.com', '$2a$10$U4PLJ0QP2z8PdZPlSaehUekflF5hBoW5JMvVf685e4beG.NTWbNpq'),
+(2,'Pierre', 'pierre@gmail.com', '$2a$10$.lx.1.Ol/HacxRsshsiHU.FOQF7D3lJmTKFTZTu2eklcn9lLsjfUa'),
+(3,'Jean', 'jean@gmail.com', '$2a$10$A3.v9qG4LWhxtUwsb/3/KuPhgOUVAsvnbinMCqsQt4MBGQFvcRf3m'),
+(4,'Michel', 'michel@gmail.com', '$2a$10$6oMht.JCoEeiWi385ZQlI.FbvxOtIFb0g03e5syVoR8GnwFCtPXLe');
 
 UNLOCK TABLES;
 
