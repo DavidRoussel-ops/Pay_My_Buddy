@@ -21,17 +21,25 @@ public class SpringSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        return http.authorizeHttpRequests(auth -> {
-            auth.requestMatchers("/login").permitAll();
-            auth.requestMatchers("/user").hasRole("USER");
-            auth.anyRequest().authenticated();
-        }).formLogin(form -> {
-            form.loginPage("/login");
-            form.defaultSuccessUrl("/user", true).permitAll();
-        }).logout(logout -> {
-            logout.logoutUrl("/logout");
-            logout.logoutSuccessUrl("/login").permitAll();
-        }).csrf(AbstractHttpConfigurer::disable).build();
+        http.authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/login").permitAll()
+                        .requestMatchers("/user").hasRole("USER")
+                        .anyRequest().authenticated()
+                )
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .loginProcessingUrl("/login")  // Ensure this matches the form action
+                        .defaultSuccessUrl("/user", true)
+                        .permitAll()
+                )
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login")
+                        .permitAll()
+                )
+                .csrf(AbstractHttpConfigurer::disable);  // Disable CSRF only if necessary
+
+        return http.build();
     }
 
     @Bean
