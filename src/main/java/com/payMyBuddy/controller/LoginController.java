@@ -1,6 +1,5 @@
 package com.payMyBuddy.controller;
 
-import com.payMyBuddy.configuration.SpringSecurityConfig;
 import com.payMyBuddy.model.User;
 import com.payMyBuddy.service.SecurityService;
 import com.payMyBuddy.service.UserService;
@@ -11,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class UserController {
+public class LoginController {
 
     @Autowired
     private UserService userService;
@@ -20,7 +19,12 @@ public class UserController {
     private SecurityService securityService;
 
     @GetMapping("/user")
-    public String getUser(HttpSession session) {
+    public String getUser() {
+        return "user";
+    }
+
+    @GetMapping("/login")
+    public String getLogin(HttpSession session) {
         if (!securityService.isAuthenticated()) {
             System.out.println("Utilisateur non reconnu.");
             return "login";
@@ -33,11 +37,6 @@ public class UserController {
         User user = userService.getUserByEmail(userDetails.getUsername());
         session.setAttribute("user", user);
         return "user";
-    }
-
-    @GetMapping("/login")
-    public String getLogin() {
-        return "login";
     }
 
     @GetMapping("/logout")
