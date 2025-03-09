@@ -8,7 +8,14 @@
 </head>
 <body>
     <div>
-        <p>Bienvenue, utilisateur !</p>
+        <p>Bienvenue sur la future page des utilisateur.</p>
+        <div th:if="${session.user != null}">
+            <p>Utilisateur connecter : <span th:text="${session.user.username}"></span> .</p>
+            <p>Votre liste d'ami(e)s : <span th:text="${session.user.connections}"></span> .</p>
+        </div>
+    </div>
+    <div>
+        <a th:href="@{/logout}">Se déconnecter</a>
     </div>
 </body>
 </html>
