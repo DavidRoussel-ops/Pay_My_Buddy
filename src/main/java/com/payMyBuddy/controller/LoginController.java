@@ -19,7 +19,10 @@ public class LoginController {
     private SecurityService securityService;
 
     @GetMapping("/user")
-    public String getUser() {
+    public String getUser(HttpSession session) {
+        UserDetails userDetails = securityService.getCurrentUserDetails();
+        User user = userService.getUserByEmail(userDetails.getUsername());
+        session.setAttribute("user", user);
         return "user";
     }
 
