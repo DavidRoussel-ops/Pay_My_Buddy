@@ -10,17 +10,22 @@
     <style>
         .btn-warning {
             color : white;
-            margin : 20% 10%;
             font-size : 20px;
             font-family : sans-serif;
             font-weight : bold;
+            width : 185px;
+            height : 55px;
+            margin : 20px 57px;
+            padding-top : 10px;
         }
 
         .btn-primary {
-            margin : 20% 10%;
             font-size : 20px;
             font-family : sans-serif;
             font-weight : bold;
+            width : 185px;
+            height : 55px;
+            margin : 20px 57px;
         }
 
         .log {
@@ -28,18 +33,31 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin : 5% 35%;
+            position : absolute;
+            top : 15%;
+            bottom : 15%;
+            right : 38%;
+            left : 38%;
         }
 
         .formulaire {
-            margin : 5%;
-            justify-content : center;
-            align-items: center;
+            height : 560px;
+            width : 300px;
         }
 
-        .form-control {
-            margin-top : 20%;
-            margin-bottom : 20%;
+        .username {
+            margin-top : 30%;
+            margin-left : 25px;
+            width : 250px;
+            height : 50px;
+        }
+
+        .password {
+            margin-top : 10%;
+            margin-bottom : 30%;
+            margin-left : 25px;
+            width : 250px;
+            height : 50px;
         }
     </style>
 
@@ -47,12 +65,12 @@
 <body>
 <div class="log">
     <form class="formulaire" method="post" action="/login">
-        <button class="btn btn-warning">Pay My Buddy</button>
+        <a th:href="@{/registration}" class="btn btn-warning">Pay My Buddy</a>
         <div>
-            <input class="form-control" type="text" name="username" placeholder="Mail">
+            <input class="form-control username" type="text" name="username" placeholder="Mail">
         </div>
         <div>
-            <input class="form-control" type="password" name="password" placeholder="Mot de passe">
+            <input class="form-control password" type="password" name="password" placeholder="Mot de passe">
         </div>
         <button class="btn btn-primary" type="submit">Se connecter</button>
     </form>
