@@ -46,4 +46,9 @@ public class LoginController {
     public String getLogout() {
         return "Merci d'être passé.";
     }
+
+    @GetMapping("/registration")
+    public String getRegistration() {
+        return "registration";
+    }
 }
