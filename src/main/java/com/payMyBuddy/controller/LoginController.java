@@ -18,12 +18,12 @@ public class LoginController {
     @Autowired
     private SecurityService securityService;
 
-    @GetMapping("/user")
+    @GetMapping("/profil")
     public String getUser(HttpSession session) {
         UserDetails userDetails = securityService.getCurrentUserDetails();
         User user = userService.getUserByEmail(userDetails.getUsername());
         session.setAttribute("user", user);
-        return "user";
+        return "profil";
     }
 
     @GetMapping("/login")
@@ -39,7 +39,7 @@ public class LoginController {
         }
         User user = userService.getUserByEmail(userDetails.getUsername());
         session.setAttribute("user", user);
-        return "user";
+        return "profil";
     }
 
     @GetMapping("/logout")
