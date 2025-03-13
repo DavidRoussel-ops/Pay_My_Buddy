@@ -8,14 +8,23 @@
 </head>
 <body>
     <div>
-        <p>Bienvenue sur la future page des utilisateur.</p>
-        <div th:if="${session.user != null}">
-            <p>Utilisateur connecter : <span th:text="${session.user.username}"></span> .</p>
-            <p>Votre liste d'ami(e)s : <span th:text="${session.user.connections}"></span> .</p>
-        </div>
+        <h1>Pay My Buddy</h1>
+        <nav>
+            <a href="#">Transférer</a>
+            <a th:href="@{/profil}">Profil</a>
+            <a href="#">Ajouter relation</a>
+            <a th:href="@{/logout}">Se déconnecter</a>
+        </nav>
     </div>
     <div>
-        <a th:href="@{/logout}">Se déconnecter</a>
+        <div th:if="${session.user != null}">
+            <p>Username      @<span th:text="${session.user.username}"></span> ></p>
+            <p>Mail          <span th:text="${session.user.email}"></span>         ></p>
+            <p>Mot de passe  <span th:text="${session.user.password}"></span>      ></p>
+        </div>
+        <div>
+            <button class="btn btn-warning">Modifier</button>
+        </div>
     </div>
 </body>
 </html>
