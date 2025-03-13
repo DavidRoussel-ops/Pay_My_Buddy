@@ -23,13 +23,13 @@ public class SpringSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth -> auth
                         .requestMatchers("/login", "/registration").permitAll()
-                        .requestMatchers("/user").hasRole("USER")
+                        .requestMatchers("/profil").hasRole("USER")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
                         .loginProcessingUrl("/login")  // Ensure this matches the form action
-                        .defaultSuccessUrl("/user", true)
+                        .defaultSuccessUrl("/profil", true)
                         .permitAll()
                 )
                 .logout(logout -> logout
