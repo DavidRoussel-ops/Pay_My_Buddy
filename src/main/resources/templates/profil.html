@@ -73,7 +73,7 @@
         </nav>
     </div>
     <div class="bodyPlace">
-        <form th:if="${session.user != null}" class="formUpdate" method="post">
+        <form th:if="${session.user != null}" class="formUpdate" method="post" action="/profil">
             <div>
                 <label>Username
                     <input class="inputUsername" type="text" name="username" placeholder="@username  >">
@@ -89,7 +89,7 @@
                     <input class="inputPassword" type="password" name="password" placeholder="mot de passe                 >">
                 </label>
             </div>
-            <button class="btn btn-warning">Modifier</button>
+            <button class="btn btn-warning" type="submit">Modifier</button>
         </form>
     </div>
 </body>
