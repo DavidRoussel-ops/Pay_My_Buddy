@@ -73,13 +73,13 @@
     </nav>
 </div>
 <div class="bodyPlace">
-    <form th:if="${session.user != null}" class="formRelationShip">
+    <form th:if="${session.user != null}" class="formRelationShip" method="post" action="/relationship">
         <div>
             <label>Chercher une relation
                 <input class="inputEmail" type="email" name="email" placeholder="  Saisir une adresse mail">
             </label>
         </div>
-        <button class="btn btn-warning">Ajouter</button>
+        <button class="btn btn-warning" type="submit">Ajouter</button>
     </form>
 </div>
 </body>
