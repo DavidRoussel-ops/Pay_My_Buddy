@@ -51,4 +51,9 @@ public class LoginController {
     public String getRegistration() {
         return "registration";
     }
+
+    @GetMapping("/relationship")
+    public String getRelationShip() {
+        return "relationship";
+    }
 }
