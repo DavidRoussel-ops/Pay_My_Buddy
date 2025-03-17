@@ -9,6 +9,7 @@
     <style>
         body {
             font-size : 25px;
+            font-family : sans-serif;
         }
 
         .header {
@@ -51,14 +52,19 @@
 
         .btn-warning {
             color : white;
-            height : 50px;
-            margin-top : -50px;
-            margin-left : 490px;
+            height : 55px;
+            margin-top : -80px;
+            margin-left : 520px;
             font-size : 25px;
+            width : 130px;
         }
 
         .formUpdate {
             margin : auto;
+        }
+
+        label {
+            margin-bottom : 15px;
         }
     </style>
 </head>
@@ -68,7 +74,7 @@
         <nav>
             <a href="#">Transférer</a>
             <a th:href="@{/profil}" class="linkActive">Profil</a>
-            <a href="#">Ajouter relation</a>
+            <a th:href="@{/relationship}">Ajouter relation</a>
             <a th:href="@{/logout}">Se déconnecter</a>
         </nav>
     </div>
