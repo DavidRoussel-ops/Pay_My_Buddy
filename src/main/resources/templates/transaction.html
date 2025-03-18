@@ -30,24 +30,35 @@
         }
 
         .bodyPlace {
-            width : 60%;
-            margin : 300px auto;
+            width : 87%;
+            margin : 135px auto;
         }
 
-        .inputEmail {
-            width : 500px;
+        .inputDescription {
+            width : 350px;
             border : 1px solid #ededed;
             border-radius : 10px;
             box-shadow : 0px 0px 0px 1px #ededed;
-            height : 50px;
-            margin-top : 5px;
+            height : 80px;
+            padding-left : 10px;
+            margin-right : 40px;
         }
 
-        .btn-warning {
+        .selectRelationShip {
+            width : 350px;
+            border : 1px solid #ededed;
+            border-radius : 10px;
+            box-shadow : 0px 0px 0px 1px #ededed;
+            height : 80px;
+            padding-left : 10px;
+            margin-right : 40px;
+        }
+
+        .btn-primary {
             color : white;
-            height : 55px;
+            height : 90px;
             margin-top : -135px;
-            margin-left : 515px;
+            margin-left : 92%;
             font-size : 25px;
             width : 130px;
         }
@@ -66,21 +77,26 @@
 <div class="header">
     <p>Pay My Buddy</p>
     <nav>
-        <a th:href="@{/transaction}">Transférer</a>
+        <a th:href="@{/transaction}" class="linkActive">Transférer</a>
         <a th:href="@{/profil}">Profil</a>
-        <a th:href="@{/relationship}" class="linkActive">Ajouter relation</a>
+        <a th:href="@{/relationship}">Ajouter relation</a>
         <a th:href="@{/logout}">Se déconnecter</a>
     </nav>
 </div>
 <div class="bodyPlace">
-    <form th:if="${session.user != null}" class="formRelationShip" method="post" action="/relationship">
-        <div>
-            <label>Chercher une relation
-                <input class="inputEmail" type="email" name="email" placeholder="  Saisir une adresse mail">
-            </label>
-        </div>
-        <button class="btn btn-warning" type="submit">Ajouter</button>
-    </form>
+    <div class="transactionForm">
+        <form class="addTransaction">
+            <select class="selectRelationShip">
+                <option>Sélectionner une relation</option>
+            </select>
+            <input class="inputDescription" type="text" name="description" placeholder="Description">
+            <dropdown class="inputAmount" type="number" name="amount" placeholder="0€">
+            <button class="btn btn-primary">Payer</button>
+        </form>
+    </div>
+    <div class="transactionHistoric">
+
+    </div>
 </div>
 </body>
 </html>
