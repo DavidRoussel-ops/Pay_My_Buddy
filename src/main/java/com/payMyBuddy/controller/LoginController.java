@@ -56,9 +56,5 @@ public class LoginController {
     public String getRelationShip() {
         return "relationship";
     }
-
-    @GetMapping("/transaction")
-    public String getTransaction() {
-        return "transaction";
-    }
+    
 }
