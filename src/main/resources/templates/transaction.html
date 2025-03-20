@@ -105,7 +105,27 @@
         </form>
     </div>
     <div class="transactionHistoric">
-
+        <table>
+            <thead>
+                <tr>
+                    <td>Mes transactions</td>
+                    <td>Relations</td>
+                    <td>Description</td>
+                    <td>Montant</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="receiver : ${receivers}">
+                    <td th:text="${receiver}"></td>
+                </tr>
+                <tr th:each="description : ${descriptions}">
+                    <td th:text="${description}"></td>
+                </tr>
+                <tr th:each="amount : ${amounts}">
+                    <td th:text="${amount}"></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 </body>
