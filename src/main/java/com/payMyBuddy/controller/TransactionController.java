@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class TransactionController {
@@ -34,12 +35,32 @@ public class TransactionController {
         ModelAndView modelAndView = new ModelAndView("transaction");
         UserDetails userDetails = securityService.getCurrentUserDetails();
         User userConnect = userService.getUserByEmail(userDetails.getUsername());
+        Iterable<Transaction> transactions = transactionService.getTransactions();
         List<User> usersFriendsList = userConnect.getConnections();
         List<String> emailFriendsList = new ArrayList<>();
+        List<String> receivers = new ArrayList<>();
+        List<String> descriptions = new ArrayList<>();
+        List<Double> amounts = new ArrayList<>();
         for (User userFriends : usersFriendsList) {
             String emailFriends = userFriends.getEmail();
             emailFriendsList.add(emailFriends);
             modelAndView.addObject("emailFriendsList", emailFriendsList);
+        }
+        for (Transaction transaction : transactions) {
+            Integer idConnect = transaction.getSender();
+            if (idConnect == userConnect.getId()) {
+                Optional<User> userReceiverId = userService.getUserById(transaction.getReceiver());
+                User userReceiver = userReceiverId.get();
+                String receiver = userReceiver.getUsername();
+                String description = transaction.getDescription();
+                Double amount = transaction.getAmount();
+                receivers.add(receiver);
+                descriptions.add(description);
+                amounts.add(amount);
+                modelAndView.addObject("receivers", receivers);
+                modelAndView.addObject("descriptions", descriptions);
+                modelAndView.addObject("amounts", amounts);
+            }
         }
         return modelAndView;
     }
