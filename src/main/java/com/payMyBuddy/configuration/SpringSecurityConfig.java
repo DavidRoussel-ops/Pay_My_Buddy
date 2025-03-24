@@ -29,7 +29,7 @@ public class SpringSecurityConfig {
                 .formLogin(form -> form
                         .loginPage("/login")
                         .loginProcessingUrl("/login")  // Ensure this matches the form action
-                        .defaultSuccessUrl("/profil", true)
+                        .defaultSuccessUrl("/transaction", true)
                         .permitAll()
                 )
                 .logout(logout -> logout
