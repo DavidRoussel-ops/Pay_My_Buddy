@@ -34,6 +34,10 @@
             margin : 135px auto;
         }
 
+        .transactionForm {
+            margin-bottom : 150px;
+        }
+
         .inputAmount {
             width : 150px;
             border : 1px solid #ededed;
@@ -80,6 +84,98 @@
         label {
             display : grid;
         }
+
+        .transactionHistoric {
+            border : 1px solid #ededed;
+            border-radius : 10px;
+            box-shadow : 0px 0px 0px 1px #ededed;
+            width : 100%;
+        }
+
+        .transactionTitle {
+            display : block;
+            margin-top : 25px;
+            margin-left : 25px;
+        }
+
+        .namesColumns {
+            display : flex;
+            height : 50px;
+        }
+
+        .widthColumns {
+            width : 33%;
+        }
+
+        .widthResults {
+            display : flex;
+            align-content : space-between;
+            margin-left : 25px;
+            padding-bottom : 100px;
+            margin-right : 15px;
+        }
+
+        .relationsColumns {
+            display : block;
+            margin-left : 25px;
+            border-bottom : 1px solid #ededed;
+            height : 50px;
+        }
+
+        .descriptionsColumns {
+            display : block;
+            border-bottom : 1px solid #ededed;
+            height : 50px;
+            padding-left : 15px;
+        }
+
+        .amountsColumns {
+            text-align : end;
+            border-bottom : 1px solid #ededed;
+            height : 50px;
+            margin-right : 15px;
+        }
+
+        .relationsResults {
+            margin-top : 10px;
+            margin-bottom : 0;
+            height : 50px;
+        }
+
+        .descriptionsResults {
+            margin-top : 10px;
+            margin-bottom : 0;
+            height : 50px;
+        }
+
+        .amountsResults {
+            margin-top : 10px;
+            margin-bottom : 0;
+            height : 50px;
+            text-align : end;
+        }
+
+        .relationsDiv {
+            display : flex;
+            flex-direction : column;
+            width : 33%;
+        }
+
+        .descriptionsDiv {
+            display : flex;
+            flex-direction : column;
+            width : 33%;
+        }
+
+        .amountsDiv {
+            display : flex;
+            flex-direction : column;
+            width : 33%;
+        }
+
+        .underline {
+            border-bottom : 1px solid #ededed;
+        }
     </style>
 </head>
 <body>
@@ -105,27 +201,37 @@
         </form>
     </div>
     <div class="transactionHistoric">
-        <table>
-            <thead>
-                <tr>
-                    <td>Mes transactions</td>
-                    <td>Relations</td>
-                    <td>Description</td>
-                    <td>Montant</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="receiver : ${receivers}">
-                    <td th:text="${receiver}"></td>
-                </tr>
-                <tr th:each="description : ${descriptions}">
-                    <td th:text="${description}"></td>
-                </tr>
-                <tr th:each="amount : ${amounts}">
-                    <td th:text="${amount}"></td>
-                </tr>
-            </tbody>
-        </table>
+        <div>
+            <p class="transactionTitle">Mes transactions</p>
+        </div>
+        <div class="namesColumns">
+            <div class="widthColumns">
+                <p class="relationsColumns">Relations</p>
+            </div>
+            <div class="widthColumns">
+                <p class="descriptionsColumns">Description</p>
+            </div>
+            <div class="widthColumns">
+                <p class="amountsColumns">Montant</p>
+            </div>
+        </div>
+        <div class="widthResults">
+            <div class="relationsDiv">
+                <div class="underline" th:each="receiver : ${receivers}">
+                    <p class="relationsResults" th:text="${receiver}"></p>
+                </div>
+            </div>
+            <div class="descriptionsDiv">
+                <div class="underline" th:each="description : ${descriptions}">
+                    <p class="descriptionsResults" th:text="${description}"></p>
+                </div>
+            </div>
+            <div class="amountsDiv">
+                <div class="underline" th:each="amount : ${amounts}">
+                    <p class="amountsResults" th:text="${amount}"></p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>
