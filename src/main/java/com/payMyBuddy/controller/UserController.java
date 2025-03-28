@@ -4,14 +4,19 @@ import com.payMyBuddy.model.User;
 import com.payMyBuddy.service.SecurityService;
 import com.payMyBuddy.service.UserService;
 import jakarta.servlet.http.HttpSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class UserController {
+
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserService userService;
@@ -22,19 +27,16 @@ public class UserController {
     @PostMapping("/registration")
     public String addUser(
             @RequestParam(value = "username") String username,
+            @RequestParam(value = "password") String password,
             @RequestParam(value = "email") String email,
-            @RequestParam(value = "password") String password
+            RedirectAttributes redirectAttributes
     ) {
         try {
-            User user = new User();
-            user.setUsername(username);
-            user.setEmail(email);
-            user.setPassword(password);
-            userService.addUser(user);
-            System.out.println("Utilisateur enregister nom : " + user.getUsername() + " mail : " + user.getEmail() + " mot de passe " + user.getPassword() + " .");
+            userService.addUser(username, password, email);
+            logger.info("Utilisateur bien enregistrer");
             return "redirect:/login";
-        } catch (Exception e) {
-            System.out.println("e : " + e.getMessage());
+        } catch (IllegalArgumentException e) {
+            redirectAttributes.addFlashAttribute("erreur", e.getMessage());
             return "redirect:/registration";
         }
     }
@@ -44,26 +46,22 @@ public class UserController {
             @RequestParam(value = "username") String username,
             @RequestParam(value = "email") String email,
             @RequestParam(value = "password") String password,
-            HttpSession session
+            HttpSession session,
+            RedirectAttributes redirectAttributes
     ) {
         UserDetails userDetails = securityService.getCurrentUserDetails();
         try {
             User userExcisting = userService.getUserByEmail(userDetails.getUsername());
-            if (username != null && !username.isEmpty()) {
-                userExcisting.setUsername(username);
-            }
-            if (email != null && !email.isEmpty()) {
-                userExcisting.setEmail(email);
-            }
-            if (password != null && !password.isEmpty()) {
-                userExcisting.setPassword(password);
-            }
-            userService.addUser(userExcisting);
+            userExcisting.setUsername(username);
+            userExcisting.setEmail(email);
+            userExcisting.setPassword(password);
+            userService.updateUser(userExcisting);
             session.setAttribute("user", userExcisting);
             securityService.updateSpringSecurityContext(userExcisting);
+            logger.info("Utilisateur bien modifier.");
             return "redirect:/profil";
-        } catch (Exception e) {
-            System.out.println("e : " + e.getMessage());
+        } catch (IllegalArgumentException e) {
+            redirectAttributes.addFlashAttribute("erreur", e.getMessage());
             return "redirect:/profil";
         }
     }
