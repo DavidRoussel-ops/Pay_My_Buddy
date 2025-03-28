@@ -37,15 +37,31 @@ public class UserService {
     }
 
     @Transactional
-    public User addUser(User user) {
-        if (formValidation(user.getUsername(), user.getPassword(), user.getEmail())) {
-            user.setUsername(user.getUsername());
-            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-            user.setEmail(user.getEmail());
-            logger.info("Utilisateur enregistrer : {}", user);
+    public User addUser(String username, String password, String email) {
+        if (formValidation(username, password, email)) {
+            User user = new User();
+            user.setUsername(username);
+            user.setPassword(bCryptPasswordEncoder.encode(password));
+            user.setEmail(email);
+            logger.info("Utilisateur enregistrer : {} {} {}", user.getUsername(), user.getPassword(), user.getEmail());
             return userRepository.save(user);
         } else {
             throw new IllegalArgumentException("L'utilisateur n'as pas pue être enregistrer.");
+        }
+    }
+
+    @Transactional
+    public User updateUser(User userExisting) {
+        Optional<User> usersInBDD = getUserById(userExisting.getId());
+        User userInBDD = usersInBDD.get();
+        if (formUpdateValidation(userExisting.getUsername(), userExisting.getPassword(), userExisting.getEmail())) {
+            userInBDD.setUsername(userExisting.getUsername());
+            userInBDD.setPassword(bCryptPasswordEncoder.encode(userExisting.getPassword()));
+            userInBDD.setEmail(userExisting.getEmail());
+            logger.info("Utilisateur modifier : {} {} {}", userInBDD.getUsername(), userInBDD.getPassword(), userInBDD.getEmail());
+            return userRepository.save(userInBDD);
+        } else {
+            throw new IllegalArgumentException("La modification n'as pas pue être enregistrer.");
         }
     }
 
@@ -76,6 +92,22 @@ public class UserService {
                 logger.warn("Cette email existe déjà !");
                 return false;
             }
+        }
+        return true;
+    }
+
+    public boolean formUpdateValidation(String username, String password, String email) {
+        if (username == null || username.isEmpty()) {
+            logger.warn("Username ne peut être vide !");
+            return false;
+        }
+        if (password == null || password.isEmpty()) {
+            logger.warn("Le mot de passe ne peut être vide !");
+            return false;
+        }
+        if (email == null || email.isEmpty()) {
+            logger.warn("L'email ne peut être vide !");
+            return false;
         }
         return true;
     }
