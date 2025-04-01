@@ -66,24 +66,36 @@
             width : 250px;
             height : 50px;
         }
+
+        .errorDiv {
+            width : 52%;
+            margin : auto;
+        }
+
+        .errorText {
+            color : red;
+        }
     </style>
 
 </head>
 <body>
-<div class="sign">
-    <form class="formulaire" method="post" action="/registration">
-        <a th:href="@{/login}" class="btn btn-warning">Pay My Buddy</a>
-        <div>
-            <input class="form-control username" type="text" name="username" placeholder="username">
-        </div>
-        <div>
-            <input class="form-control mail" type="email" name="email" placeholder="Mail">
-        </div>
-        <div>
-            <input class="form-control password" type="password" name="password" placeholder="Mot de passe">
-        </div>
-        <button class="btn btn-primary" type="submit">S'inscrire</button>
-    </form>
-</div>
+    <div class="sign">
+        <form class="formulaire" method="post" action="/registration">
+            <a th:href="@{/login}" class="btn btn-warning">Pay My Buddy</a>
+            <div>
+                <input class="form-control username" type="text" name="username" placeholder="username">
+            </div>
+            <div>
+                <input class="form-control mail" type="email" name="email" placeholder="Mail">
+            </div>
+            <div>
+                <input class="form-control password" type="password" name="password" placeholder="Mot de passe">
+            </div>
+            <button class="btn btn-primary" type="submit">S'inscrire</button>
+        </form>
+    </div>
+    <div class="errorDiv" th:if="${error}">
+        <p class="errorText" th:text="${error}"></p>
+    </div>
 </body>
 </html>

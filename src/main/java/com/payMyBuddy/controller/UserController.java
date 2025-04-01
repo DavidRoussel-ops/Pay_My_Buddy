@@ -36,7 +36,7 @@ public class UserController {
             logger.info("Utilisateur bien enregistrer");
             return "redirect:/login";
         } catch (IllegalArgumentException e) {
-            redirectAttributes.addFlashAttribute("erreur", e.getMessage());
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
             return "redirect:/registration";
         }
     }
@@ -61,7 +61,7 @@ public class UserController {
             logger.info("Utilisateur bien modifier.");
             return "redirect:/profil";
         } catch (IllegalArgumentException e) {
-            redirectAttributes.addFlashAttribute("erreur", e.getMessage());
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
             return "redirect:/profil";
         }
     }

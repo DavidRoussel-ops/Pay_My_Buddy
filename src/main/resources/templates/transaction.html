@@ -189,29 +189,41 @@
             flex-direction : row-reverse;
             border-bottom : 1px solid #ededed;
         }
+
+        .errorDiv {
+            width : 52%;
+            margin : auto;
+        }
+
+        .errorText {
+            color : red;
+        }
     </style>
 </head>
 <body>
-<div class="header">
-    <p>Pay My Buddy</p>
-    <nav>
-        <a th:href="@{/transaction}" class="linkActive">Transférer</a>
-        <a th:href="@{/profil}">Profil</a>
-        <a th:href="@{/relationship}">Ajouter relation</a>
-        <a th:href="@{/logout}">Se déconnecter</a>
-    </nav>
-</div>
-<div class="bodyPlace">
-    <div class="transactionForm">
-        <form class="addTransaction" method="post" action="/transaction">
-            <select class="selectRelationShip" name="email">
-                <option>Sélectionner une relation</option>
-                <option th:each="email : ${emailFriendsList}" th:value="${email}" th:text="${email}"></option>
-            </select>
-            <input class="inputDescription" type="text" name="description" placeholder="Description">
-            <input class="inputAmount" type="number" name="amount" placeholder="0€" step="0.01" min="0">
-            <button class="btn btn-primary" type="submit">Payer</button>
+    <div class="header">
+        <p>Pay My Buddy</p>
+        <nav>
+            <a th:href="@{/transaction}" class="linkActive">Transférer</a>
+            <a th:href="@{/profil}">Profil</a>
+            <a th:href="@{/relationship}">Ajouter relation</a>
+            <a th:href="@{/logout}">Se déconnecter</a>
+        </nav>
+    </div>
+    <div class="bodyPlace">
+        <div class="transactionForm">
+            <form class="addTransaction" method="post" action="/transaction">
+                <select class="selectRelationShip" name="email">
+                    <option>Sélectionner une relation</option>
+                    <option th:each="email : ${emailFriendsList}" th:value="${email}" th:text="${email}"></option>
+                </select>
+                <input class="inputDescription" type="text" name="description" placeholder="Description">
+                <input class="inputAmount" type="number" name="amount" placeholder="0€" step="0.01" min="0">
+                <button class="btn btn-primary" type="submit">Payer</button>
         </form>
+    </div>
+    <div class="errorDiv" th:if="${error}">
+        <p class="errorText" th:text="${error}"></p>
     </div>
     <div class="transactionHistoric">
         <div>

@@ -66,6 +66,15 @@
         label {
             margin-bottom : 15px;
         }
+
+        .errorDiv {
+            width : 52%;
+            margin : auto;
+        }
+
+        .errorText {
+            color : red;
+        }
     </style>
 </head>
 <body>
@@ -97,6 +106,9 @@
             </div>
             <button class="btn btn-warning" type="submit">Modifier</button>
         </form>
+    </div>
+    <div class="errorDiv" th:if="${error}">
+        <p class="errorText" th:text="${error}"></p>
     </div>
 </body>
 </html>

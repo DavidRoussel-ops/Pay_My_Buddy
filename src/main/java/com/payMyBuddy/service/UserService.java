@@ -77,20 +77,20 @@ public class UserService {
         }
         if (username == null || username.isEmpty()) {
             logger.warn("Username ne peut être vide !");
-            return false;
+            throw new IllegalArgumentException("Username ne peut être vide !");
         }
         if (password == null || password.isEmpty()) {
             logger.warn("Le mot de passe ne peut être vide !");
-            return false;
+            throw new IllegalArgumentException("Le mot de passe ne peut être vide !");
         }
         if (email == null || email.isEmpty()) {
             logger.warn("L'email ne peut être vide !");
-            return false;
+            throw new IllegalArgumentException("L'email ne peut être vide !");
         }
         for (String emailInBDD : emailsInBDD) {
             if (email.equals(emailInBDD)) {
                 logger.warn("Cette email existe déjà !");
-                return false;
+                throw new IllegalArgumentException("Cette email existe déjà !");
             }
         }
         return true;
@@ -99,15 +99,15 @@ public class UserService {
     public boolean formUpdateValidation(String username, String password, String email) {
         if (username == null || username.isEmpty()) {
             logger.warn("Username ne peut être vide !");
-            return false;
+            throw new IllegalArgumentException("Username ne peut être vide !");
         }
         if (password == null || password.isEmpty()) {
             logger.warn("Le mot de passe ne peut être vide !");
-            return false;
+            throw new IllegalArgumentException("Le mot de passe ne peut être vide !");
         }
         if (email == null || email.isEmpty()) {
             logger.warn("L'email ne peut être vide !");
-            return false;
+            throw new IllegalArgumentException("L'email ne peut être vide !");
         }
         return true;
     }

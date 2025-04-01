@@ -36,6 +36,9 @@ public class UserFriendsController {
         try {
             User userExcisting = userService.getUserByEmail(userDetails.getUsername());
             User userMail = userService.getUserByEmail(email);
+            if (email.isEmpty()) {
+                throw new IllegalArgumentException("Veuillez remplir le champ puis cliquer sur Ajouter.");
+            }
             if (userMail != null) {
                 userFriendsService.addUserFriends(userExcisting.getId(), userMail.getId());
                 logger.info("Email de l'utilisateur enregistrer en relation : {}", userMail.getEmail());

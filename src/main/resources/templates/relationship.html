@@ -60,27 +60,39 @@
         label {
             display : grid;
         }
+
+        .errorDiv {
+            width : 52%;
+            margin : auto;
+        }
+
+        .errorText {
+            color : red;
+        }
     </style>
 </head>
 <body>
-<div class="header">
-    <p>Pay My Buddy</p>
-    <nav>
-        <a th:href="@{/transaction}">Transférer</a>
-        <a th:href="@{/profil}">Profil</a>
-        <a th:href="@{/relationship}" class="linkActive">Ajouter relation</a>
-        <a th:href="@{/logout}">Se déconnecter</a>
-    </nav>
-</div>
-<div class="bodyPlace">
-    <form th:if="${session.user != null}" class="formRelationShip" method="post" action="/relationship">
-        <div>
-            <label>Chercher une relation
-                <input class="inputEmail" type="email" name="email" placeholder="  Saisir une adresse mail">
-            </label>
-        </div>
-        <button class="btn btn-warning" type="submit">Ajouter</button>
-    </form>
-</div>
+    <div class="header">
+        <p>Pay My Buddy</p>
+        <nav>
+            <a th:href="@{/transaction}">Transférer</a>
+            <a th:href="@{/profil}">Profil</a>
+            <a th:href="@{/relationship}" class="linkActive">Ajouter relation</a>
+            <a th:href="@{/logout}">Se déconnecter</a>
+        </nav>
+    </div>
+    <div class="bodyPlace">
+        <form th:if="${session.user != null}" class="formRelationShip" method="post" action="/relationship">
+            <div>
+                <label>Chercher une relation
+                    <input class="inputEmail" type="email" name="email" placeholder="  Saisir une adresse mail">
+                </label>
+            </div>
+            <button class="btn btn-warning" type="submit">Ajouter</button>
+        </form>
+    </div>
+    <div class="errorDiv" th:if="${error}">
+        <p class="errorText" th:text="${error}"></p>
+    </div>
 </body>
 </html>

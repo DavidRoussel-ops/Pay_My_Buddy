@@ -88,7 +88,7 @@ public class TransactionController {
                 throw new IllegalArgumentException("Veuillez selectionnez une relation valide.");
             }
         } catch (IllegalArgumentException e) {
-            redirectAttributes.addFlashAttribute("erreur", e.getMessage());
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
             return "redirect:/transaction";
         }
     }
