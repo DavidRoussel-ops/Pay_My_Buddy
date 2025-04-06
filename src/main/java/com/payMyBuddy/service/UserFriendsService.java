@@ -44,7 +44,7 @@ public class UserFriendsService {
             logger.info("Relation bien enregistrer.");
             return userFriendsRepository.save(userFriends);
         } catch (IllegalArgumentException e){
-            throw new IllegalArgumentException("La relation n'as pas était ajouter.");
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 
