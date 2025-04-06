@@ -57,6 +57,16 @@ public class UserFriendsServiceTest {
     }
 
     @Test
+    public void testAddUserFriendsExistInBDD() throws IllegalArgumentException {
+        Exception exception = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            userFriendsService.addUserFriends(1, 2);
+        });
+        String expectedMessage = "Vous avez déjà ajouter cette personne à votre liste de connexion.";
+        String actualMessage = exception.getMessage();
+        Assertions.assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
     public void testDeleteUserFriendsById() throws Exception {
         Iterable<UserFriends> allUserFriendsInBDD = userFriendsService.getUserFriends();
         int lastId = 0;
