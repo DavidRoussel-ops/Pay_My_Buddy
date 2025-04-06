@@ -32,7 +32,7 @@ public class TransactionService {
 
     @Transactional
     public Transaction addTransaction(int userId, int userFriendId, String description, double amount) {
-        if (formTransactionValidation(userFriendId, description, amount)) {
+        if (formTransactionValidation(description, amount)) {
             Transaction transaction = new Transaction();
             transaction.setSender(userId);
             transaction.setReceiver(userFriendId);
@@ -49,20 +49,14 @@ public class TransactionService {
         transactionRepository.deleteById(id);
     }
 
-    public boolean formTransactionValidation(int userFriendId, String description, Double amount) {
-        Optional<User> usersIdInBDD = userService.getUserById(userFriendId);
-        User userFound = usersIdInBDD.get();
-        if (userFound.getEmail() == null) {
-            logger.warn("L'adresse mail renseigner ne corresponds à aucune personnes connue de l'application !");
-            return false;
-        }
+    public boolean formTransactionValidation(String description, double amount) {
         if (description == null || description.isEmpty()) {
             logger.warn("Vous devez donner une description de la transaction !");
-            return false;
+            throw new IllegalArgumentException("Vous devez donner une description de la transaction !");
         }
-        if (amount.isNaN() || amount == 0.0) {
+        if (amount == 0.0) {
             logger.warn("Vous devez donner un montant à la transaction !");
-            return false;
+            throw new IllegalArgumentException("Vous devez donner un montant à la transaction !");
         }
         return true;
     }
