@@ -46,11 +46,6 @@ public class LoginController {
         return "transaction";
     }
 
-    @GetMapping("/logout")
-    public String getLogout() {
-        return "Merci d'être passé.";
-    }
-
     @GetMapping("/registration")
     public String getRegistration() {
         return "registration";
