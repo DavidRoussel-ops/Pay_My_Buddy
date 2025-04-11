@@ -15,6 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -24,8 +25,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.authentication;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -54,6 +54,7 @@ public class UserFriendsControllerTest {
     }
 
     @Test
+    @WithMockUser
     public void testAddUserFriends() throws Exception {
         User userExisting = new User();
         userExisting.setId(1);
@@ -61,9 +62,7 @@ public class UserFriendsControllerTest {
         User userMail = new User();
         userMail.setId(2);
         userMail.setEmail("test2@gmail.com");
-        UserFriends userFriends = new UserFriends();
-        userFriends.setUserId(userExisting.getId());
-        userFriends.setUserFriends(userMail.getId());
+        UserFriends userFriends = mock(UserFriends.class);
         MockHttpSession session = new MockHttpSession();
         session.setAttribute("user", userExisting);
         UserDetails userDetails = mock(UserDetails.class);
@@ -74,7 +73,54 @@ public class UserFriendsControllerTest {
         when(userFriendsService.addUserFriends(userExisting.getId(), userMail.getId())).thenReturn(userFriends);
         mockMvc.perform(post("/relationship")
                         .param("email", userMail.getEmail()))
-                .andExpect(status().is3xxRedirection());
-                //.andExpect(redirectedUrl("/relationship"));
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/relationship"));
+    }
+
+    @Test
+    @WithMockUser
+    public void testAddUserFriendsEmailEmpty() throws Exception {
+        User userExisting = new User();
+        userExisting.setId(1);
+        userExisting.setEmail("test@gmail.com");
+        User userMail = new User();
+        userMail.setId(2);
+        userMail.setEmail("");
+        UserFriends userFriends = new UserFriends();
+        userFriends.setUserId(userExisting.getId());
+        userFriends.setUserFriends(userMail.getId());
+        MockHttpSession session = new MockHttpSession();
+        session.setAttribute("user", userExisting);
+        UserDetails userDetails = mock(UserDetails.class);
+        when(userDetails.getUsername()).thenReturn(userExisting.getEmail());
+        when(securityService.isAuthenticated()).thenReturn(true);
+        when(securityService.getCurrentUserDetails()).thenReturn(userDetails);
+        when(userService.getUserByEmail(userDetails.getUsername())).thenReturn(userExisting);
+        when(userFriendsService.addUserFriends(userExisting.getId(), userMail.getId())).thenThrow(new IllegalArgumentException("Veuillez remplir le champ puis cliquer sur Ajouter."));
+        mockMvc.perform(post("/relationship")
+                        .param("email", userMail.getEmail()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/relationship"))
+                .andExpect(flash().attributeExists("error"))
+                .andExpect(flash().attribute("error", "Veuillez remplir le champ puis cliquer sur Ajouter."));
+    }
+
+    @Test
+    @WithMockUser
+    public void testAddUserFriendsController() throws Exception {
+        User userExisting = new User();
+        userExisting.setId(1);
+        userExisting.setEmail("test@gmail.com");
+        MockHttpSession session = new MockHttpSession();
+        session.setAttribute("user", userExisting);
+        UserDetails userDetails = mock(UserDetails.class);
+        when(userDetails.getUsername()).thenReturn(userExisting.getEmail());
+        when(securityService.isAuthenticated()).thenReturn(true);
+        when(securityService.getCurrentUserDetails()).thenReturn(userDetails);
+        when(userService.getUserByEmail(userDetails.getUsername())).thenReturn(userExisting);
+        mockMvc.perform(post("/relationship")
+                        .param("email", "test@gmail.com"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/relationship"));
     }
 }
