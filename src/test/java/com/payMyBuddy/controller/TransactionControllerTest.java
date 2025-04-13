@@ -59,30 +59,24 @@ public class TransactionControllerTest {
     @Test
     @WithMockUser
     public void testTransaction() throws Exception {
-        List<Transaction> listTransactions = new ArrayList<>();
-        Transaction transaction = new Transaction();
-        transaction.setSender(1);
-        transaction.setReceiver(2);
-        transaction.setDescription("note de frais");
-        transaction.setAmount(20);
-        listTransactions.add(transaction);
+        List<Transaction> transactions = new ArrayList<>();
         ArrayList<User> listUsers = new ArrayList<>();
         User userLambda = new User();
         userLambda.setId(2);
         userLambda.setEmail("test2@gmail.com");
         userLambda.setUsername("test");
         listUsers.add(userLambda);
-        List<String> receivers = new ArrayList<>();
-        List<String> descriptions = new ArrayList<>();
-        List<Double> amounts = new ArrayList<>();
-        receivers.add(userLambda.getUsername());
-        descriptions.add(transaction.getDescription());
-        amounts.add(transaction.getAmount());
         User userExisting = new User();
         userExisting.setId(1);
         userExisting.setEmail("test@gmail.com");
         userExisting.setConnections(listUsers);
-        userExisting.setSender(listTransactions);
+        userExisting.setSender(transactions);
+        Transaction transaction = new Transaction();
+        transaction.setSender(1);
+        transaction.setReceiver(2);
+        transaction.setDescription("note de frais");
+        transaction.setAmount(20);
+        transactions.add(transaction);
         MockHttpSession session = new MockHttpSession();
         session.setAttribute("user", userExisting);
         UserDetails userDetails = mock(UserDetails.class);
@@ -90,13 +84,15 @@ public class TransactionControllerTest {
         when(securityService.isAuthenticated()).thenReturn(true);
         when(securityService.getCurrentUserDetails()).thenReturn(userDetails);
         when(userService.getUserByEmail(userDetails.getUsername())).thenReturn(userExisting);
+        when(transactionService.getTransactions()).thenReturn(transactions);
+        when(userService.getUserById(2)).thenReturn(Optional.of(userLambda));
         mockMvc.perform(get("/transaction"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("transaction"))
-                .andExpect(model().attributeExists("emailFriendsList"));
-                /*.andExpect(model().attributeExists("receivers"))
+                .andExpect(model().attributeExists("emailFriendsList"))
+                .andExpect(model().attributeExists("receivers"))
                 .andExpect(model().attributeExists("descriptions"))
-                .andExpect(model().attributeExists("amounts"));*/
+                .andExpect(model().attributeExists("amounts"));
     }
 
     @Test
