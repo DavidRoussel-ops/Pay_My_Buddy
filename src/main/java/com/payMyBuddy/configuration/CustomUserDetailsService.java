@@ -19,6 +19,11 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * Surcharge de la méthode loadUserByUsername
+     * @param email
+     * @throws UsernameNotFoundException
+     */
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email);
@@ -29,6 +34,9 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
     }
 
+    /**
+     * Méthode concernant les autorisations données aux utilisateur
+     */
     private List<GrantedAuthority> getGrantedAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_USER"));

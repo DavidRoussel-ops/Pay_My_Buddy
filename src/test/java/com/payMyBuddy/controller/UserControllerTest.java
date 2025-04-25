@@ -1,45 +1,19 @@
 package com.payMyBuddy.controller;
 
-import com.payMyBuddy.configuration.CustomUserDetailsService;
 import com.payMyBuddy.model.User;
-import com.payMyBuddy.repository.UserRepository;
 import com.payMyBuddy.service.SecurityService;
 import com.payMyBuddy.service.UserService;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.mock.web.MockHttpSession;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
-import org.springframework.test.context.event.annotation.AfterTestClass;
-import org.springframework.test.context.event.annotation.AfterTestMethod;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.function.Function;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -61,9 +35,6 @@ public class UserControllerTest {
 
     @MockitoBean
     private UserService userService;
-
-    @Autowired
-    private UserController userController;
 
     public void setUpMockMvc() {
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();

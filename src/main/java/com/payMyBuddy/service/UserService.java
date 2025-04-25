@@ -24,18 +24,39 @@ public class UserService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    /**
+     * Méthode renvoyant la liste de tous les utilisateurs
+     * @return Iterable<User>
+     */
     public Iterable<User> getUsers() {
         return userRepository.findAll();
     }
 
+    /**
+     * Méthode renvoyant un utilisateur par son ID
+     * @param id
+     * @return Optional<User>
+     */
     public Optional<User> getUserById(Integer id) {
         return userRepository.findById(id);
     }
 
+    /**
+     * Méthode renvoyant un utilisateur grace à son email
+     * @param email
+     * @return User
+     */
     public User getUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
+    /**
+     * Méthode d'ajout de nouvel utilisateur
+     * @param username
+     * @param password
+     * @param email
+     * @return User
+     */
     @Transactional
     public User addUser(String username, String password, String email) {
         if (formValidation(username, password, email)) {
@@ -50,6 +71,11 @@ public class UserService {
         }
     }
 
+    /**
+     * Méthode de mise à jour des données utilisateur
+     * @param userExisting
+     * @return User
+     */
     @Transactional
     public User updateUser(User userExisting) {
         Optional<User> usersInBDD = getUserById(userExisting.getId());
@@ -65,10 +91,21 @@ public class UserService {
         }
     }
 
+    /**
+     * Méthode de suppression d'un utilisateur grace à son ID
+     * @param id
+     */
     public void deleteUserById(Integer id) {
         userRepository.deleteById(id);
     }
 
+    /**
+     * Méthode de vérification des champs pour validation enregistrement utilisateur
+     * @param username
+     * @param password
+     * @param email
+     * @return IllegalArgumentException
+     */
     public boolean formValidation(String username, String password, String email) {
         List<String> emailsInBDD = new ArrayList<>();
         Iterable<User> usersMails = getUsers();
@@ -96,6 +133,13 @@ public class UserService {
         return true;
     }
 
+    /**
+     * Méthode de vérification des champs pour validation des modification des données utilisateurs
+     * @param username
+     * @param password
+     * @param email
+     * @return IllegalArgumentException
+     */
     public boolean formUpdateValidation(String username, String password, String email) {
         if (username == null || username.isEmpty()) {
             logger.warn("Username ne peut être vide !");

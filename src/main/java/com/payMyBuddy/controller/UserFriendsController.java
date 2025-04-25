@@ -27,6 +27,12 @@ public class UserFriendsController {
     @Autowired
     private SecurityService securityService;
 
+    /**
+     * Controller de la méthode post relationship
+     * @param email
+     * @param redirectAttributes
+     * @return redirection page d'ajout de relation
+     */
     @PostMapping("/relationship")
     public String addUserFriends(
             @RequestParam(value = "email") String email,

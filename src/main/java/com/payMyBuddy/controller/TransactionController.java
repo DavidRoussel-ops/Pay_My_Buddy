@@ -34,6 +34,9 @@ public class TransactionController {
     @Autowired
     private SecurityService securityService;
 
+    /**
+     * Controller de la page transaction
+     */
     @GetMapping("/transaction")
     public ModelAndView transaction() {
         ModelAndView modelAndView = new ModelAndView("transaction");
@@ -69,6 +72,14 @@ public class TransactionController {
         return modelAndView;
     }
 
+    /**
+     * Controller de la méthode post transaction
+     * @param email
+     * @param description
+     * @param amount
+     * @param redirectAttributes
+     * @return transaction
+     */
     @PostMapping("/transaction")
     public String populateList(
             @RequestParam(value = "email") String email,

@@ -22,6 +22,10 @@ public class LoginController {
     @Autowired
     private SecurityService securityService;
 
+    /**
+     * Controller de la page profil
+     * @param session
+     */
     @GetMapping("/profil")
     public String getUser(HttpSession session) {
         UserDetails userDetails = securityService.getCurrentUserDetails();
@@ -31,6 +35,10 @@ public class LoginController {
         return "profil";
     }
 
+    /**
+     * Controller de la page login
+     * @param session
+     */
     @GetMapping("/login")
     public String getLogin(HttpSession session) {
         if (!securityService.isAuthenticated()) {
@@ -46,11 +54,17 @@ public class LoginController {
         return "transaction";
     }
 
+    /**
+     * Controller de la page registration
+     */
     @GetMapping("/registration")
     public String getRegistration() {
         return "registration";
     }
 
+    /**
+     * Controller de la page relationship
+     */
     @GetMapping("/relationship")
     public String getRelationShip() {
         return "relationship";

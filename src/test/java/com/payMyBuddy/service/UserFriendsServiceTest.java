@@ -1,6 +1,5 @@
 package com.payMyBuddy.service;
 
-import com.payMyBuddy.model.User;
 import com.payMyBuddy.model.UserFriends;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

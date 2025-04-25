@@ -1,7 +1,6 @@
 package com.payMyBuddy.service;
 
 import com.payMyBuddy.model.Transaction;
-import com.payMyBuddy.model.User;
 import com.payMyBuddy.repository.TransactionRepository;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
@@ -17,19 +16,33 @@ public class TransactionService {
     private static final Logger logger = LoggerFactory.getLogger(TransactionService.class);
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
     private TransactionRepository transactionRepository;
 
+    /**
+     * Méthode renvoyant toute les transactions
+     * @return Iterable<Transaction>
+     */
     public Iterable<Transaction> getTransactions() {
         return transactionRepository.findAll();
     }
 
+    /**
+     * Méthode renvoyant une transaction par son ID
+     * @param id
+     * @return Optional<Transaction>
+     */
     public Optional<Transaction> getTransactionById(Integer id) {
         return transactionRepository.findById(id);
     }
 
+    /**
+     * Méthode d'ajout de transaction
+     * @param userId
+     * @param userFriendId
+     * @param description
+     * @param amount
+     * @return Transaction
+     */
     @Transactional
     public Transaction addTransaction(int userId, int userFriendId, String description, double amount) {
         if (formTransactionValidation(description, amount)) {
@@ -45,10 +58,20 @@ public class TransactionService {
         }
     }
 
+    /**
+     * Méthode de suppression d'une transaction par son id
+     * @param id
+     */
     public void deleteTransactionById(Integer id) {
         transactionRepository.deleteById(id);
     }
 
+    /**
+     * Méthode de vérification des champs pour validation
+     * @param description
+     * @param amount
+     * @return IllegalArgumentException
+     */
     public boolean formTransactionValidation(String description, double amount) {
         if (description == null || description.isEmpty()) {
             logger.warn("Vous devez donner une description de la transaction !");

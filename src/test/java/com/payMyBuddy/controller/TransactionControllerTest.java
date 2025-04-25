@@ -2,10 +2,8 @@ package com.payMyBuddy.controller;
 
 import com.payMyBuddy.model.Transaction;
 import com.payMyBuddy.model.User;
-import com.payMyBuddy.model.UserFriends;
 import com.payMyBuddy.service.SecurityService;
 import com.payMyBuddy.service.TransactionService;
-import com.payMyBuddy.service.UserFriendsService;
 import com.payMyBuddy.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,9 +46,6 @@ public class TransactionControllerTest {
 
     @MockitoBean
     private TransactionService transactionService;
-
-    @Autowired
-    private UserController userController;
 
     public void setUpMockMvc() {
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();

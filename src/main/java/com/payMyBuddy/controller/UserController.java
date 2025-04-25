@@ -24,6 +24,14 @@ public class UserController {
     @Autowired
     private SecurityService securityService;
 
+    /**
+     * Controller de la méthode post de registration
+     * @param username
+     * @param password
+     * @param email
+     * @param redirectAttributes
+     * @return page de login en succès/ registration en cas d'échec
+     */
     @PostMapping("/registration")
     public String addUser(
             @RequestParam(value = "username") String username,
@@ -41,6 +49,15 @@ public class UserController {
         }
     }
 
+    /**
+     * Controller de la méthode post updateUser
+     * @param username
+     * @param email
+     * @param password
+     * @param session
+     * @param redirectAttributes
+     * @return page de profil
+     */
     @PostMapping("/profil")
     public String updateUser(
             @RequestParam(value = "username") String username,

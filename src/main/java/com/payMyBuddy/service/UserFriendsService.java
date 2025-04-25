@@ -16,19 +16,31 @@ public class UserFriendsService {
     private static final Logger logger = LoggerFactory.getLogger(UserFriendsService.class);
 
     @Autowired
-    UserService userService;
-
-    @Autowired
     UserFriendsRepository userFriendsRepository;
 
+    /**
+     * Méthode renvoyant la liste des relations dans la BDD
+     * @return Iterable<UserFriends>
+     */
     public Iterable<UserFriends> getUserFriends() {
         return userFriendsRepository.findAll();
     }
 
+    /**
+     * Méthode renvoyant une relation par son ID
+     * @param id
+     * @return Optional<UserFriends>
+     */
     public Optional<UserFriends> getUserFriendsById(Integer id) {
         return userFriendsRepository.findById(id);
     }
 
+    /**
+     * Méthode d'ajout de relation
+     * @param userId
+     * @param userFriendsId
+     * @return UserFriends
+     */
     @Transactional
     public UserFriends addUserFriends(int userId, int userFriendsId) {
         Iterable<UserFriends> userFriendsInBDD = getUserFriends();
@@ -48,6 +60,10 @@ public class UserFriendsService {
         }
     }
 
+    /**
+     * Méthode de suppression d'une relation par son ID
+     * @param id
+     */
     public void deleteUserFriendsById(Integer id) {
         userFriendsRepository.deleteById(id);
     }

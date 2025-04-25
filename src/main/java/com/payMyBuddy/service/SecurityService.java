@@ -15,6 +15,10 @@ public class SecurityService {
     @Autowired
     private UserDetailsService userDetailsService;
 
+    /**
+     * Méthode permettant de mettre à jour les utilisateurs authentifier
+     * @param user
+     */
     public void updateSpringSecurityContext(User user) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = userDetailsService.loadUserByUsername(user.getEmail());
@@ -26,11 +30,19 @@ public class SecurityService {
         SecurityContextHolder.getContext().setAuthentication(newAuthentication);
     }
 
+    /**
+     * Méthode permettant de vérifier l'authentification dans un context sécurisé
+     * @return true si authentifier false si non
+     */
     public boolean isAuthenticated() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return authentication != null && authentication.isAuthenticated();
     }
 
+    /**
+     * Méthode récupérant les détails utilisateurs
+     * @return UserDetails
+     */
     public UserDetails getCurrentUserDetails() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.isAuthenticated()) {
