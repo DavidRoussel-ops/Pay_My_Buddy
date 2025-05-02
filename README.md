@@ -29,7 +29,8 @@ Pour commencer lancer le script SQL que vous pouvais retrouver dans le chemin sr
 Une fois le script executer placer vous sur le fichier src/main/java/com/payMyBuddy/PayMyBuddyApplication.java
 Lancer l'application avec la commande : 
 - mvn spring-boot:run
-Une fois sur l'aapplication vous pouver : 
+
+Une fois sur l'application vous pouver : 
 - Vous connnecter avec cette utilisateur enregistrer
   - Identifiant : michel@gmail.com
   - Mot de passe : michel
