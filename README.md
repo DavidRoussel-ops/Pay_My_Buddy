@@ -6,7 +6,7 @@ Cette application permet aux clients de transférer de l'argent pour gérer leur
 
 ----------------------------------------------------------------------------------------------------------------------------------------
 
-# Mdp
+# MPD
 
 ![PayMyBuddy.jpg](Pictures%2FPayMyBuddy.jpg)
 
