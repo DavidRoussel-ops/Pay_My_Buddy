@@ -36,3 +36,12 @@ Une fois sur l'application vous pouver :
   - Mot de passe : michel
 - Créer votre propre utilisateur en cliquant sur le bouton Pay my buddy qui sert de switch entre la page de login et création de compte.
 
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+# Cas de test
+
+Pour le lancement des tests unitaires il faut ce placer sur la BDD de test que vous retrouverais dans le chemin :
+
+- src/test/resources/paymybuddyTest.sql
+
