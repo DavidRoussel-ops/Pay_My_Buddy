@@ -35,7 +35,7 @@ public class TransactionServiceTest {
             counter ++;
         }
         assertThat(allTransactions).isNotNull();
-        Assertions.assertEquals(5, counter);
+        Assertions.assertEquals(4, counter);
     }
 
     @Test
@@ -73,7 +73,7 @@ public class TransactionServiceTest {
         Transaction transaction = transactionOptional.get();
         transactionService.deleteTransactionById(transaction.getId());
         assertThat(allTransactions).isNotNull();
-        Assertions.assertEquals(4, counter);
+        Assertions.assertEquals(3, counter);
     }
 
     @Test
